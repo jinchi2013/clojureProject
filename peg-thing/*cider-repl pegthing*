@@ -1,0 +1,99 @@
+; CIDER 0.8.1 (package: 20141120.1746) (Java 1.6.0_65, Clojure 1.8.0, nREPL 0.2.12)
+pegthing.core> (tri* 2)
+ArityException Wrong number of args (1) passed to: core/tri*  clojure.lang.AFn.throwArity (AFn.java:429)
+pegthing.core> (tri* 2 1)
+OutOfMemoryError Java heap space  java.util.Arrays.copyOf (Arrays.java:2882)
+pegthing.core> (tri*)
+OutOfMemoryError Java heap space  java.util.Arrays.copyOf (Arrays.java:2882)
+pegthing.core> (take 5 tri)
+(1 3 6 10 15)
+pegthing.core> (take 3 tri)
+(1 3 6)
+pegthing.core> (triangular? 3)
+true
+pegthing.core> (take-while #(>= 3 %) tri)
+(1 3)
+pegthing.core> (row-num 3)
+2
+pegthing.core> (row-num 6)
+3
+pegthing.core> (connect {} 10 1 2 4)
+{1 {:connections {4 2}}, 4 {:connections {1 2}}}
+pegthing.core> (connect {} 10 1 3 6)
+{1 {:connections {6 3}}, 6 {:connections {1 3}}}
+pegthing.core> (assoc-in {} [1] 2)
+{1 2}
+pegthing.core> (assoc-in {} [1 :connections] 2)
+{1 {:connections 2}}
+pegthing.core> (assoc-in {} [1 2 3 :connections] 2)
+{1 {2 {3 {:connections 2}}}}
+pegthing.core> (assoc-in {} [1 2 3 :connections] 1)
+{1 {2 {3 {:connections 1}}}}
+pegthing.core> (assoc {} 1 2)
+{1 2}
+pegthing.core> (assoc {} 1 2 1 2)
+{1 2}
+pegthing.core> (assoc {} 1 2 1)
+IllegalArgumentException assoc expects even number of arguments after map/vector, found odd number  clojure.core/assoc--4371 (core.clj:195)
+pegthing.core> (assoc {} 1 2 2 2)
+{1 2, 2 2}
+pegthing.core> (assoc-in {} [1 :connections 4] 2)
+{1 {:connections {4 2}}}
+pegthing.core> (connect-right {} 6 1)
+{}
+pegthing.core> (connect-right {} 10 2)
+{}
+pegthing.core> (connect-right {} 10 2)
+{}
+pegthing.core> (connect-right {} 15 4)
+{4 {:connections {6 5}}, 6 {:connections {4 5}}}
+pegthing.core> (row-num 10)
+4
+pegthing.core> (connect-down-left {} 15 5)
+{5 {:connections {12 8}}, 12 {:connections {5 8}}}
+pegthing.core> (connect-down-left {} 15 3)
+{3 {:connections {8 5}}, 8 {:connections {3 5}}}
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: connect-down-rigth in this context, compiling:(/Users/9cjin/clojure-noob/pegthing/src/pegthing/core.clj:71:5) 
+pegthing.core> (add-pos {} 15 1)
+{1 {:pegged true, :connections {4 2, 6 3}}, 4 {:connections {1 2}}, 6 {:connections {1 3}}}
+pegthing.core> (add-pos {} 15 2)
+{2 {:pegged true, :connections {7 4, 9 5}}, 7 {:connections {2 4}}, 9 {:connections {2 5}}}
+pegthing.core> (add-pos {} 21 8)
+{8 {:pegged true, :connections {10 9, 17 12, 19 13}}, 10 {:connections {8 9}}, 17 {:connections {8 12}}, 19 {:connections {8 13}}}
+pegthing.core> (connect-down-left {} 15 3)
+{3 {:connections {8 5}}, 8 {:connections {3 5}}}
+pegthing.core> (connect-right {} 10 1)
+{}
+pegthing.core> (connect-right {} 15 4)
+{4 {:connections {6 5}}, 6 {:connections {4 5}}}
+CompilerException java.lang.RuntimeException: No such namespace: s, compiling:(/Users/9cjin/clojure-noob/pegthing/src/pegthing/core.clj:81:3) 
+CompilerException java.lang.RuntimeException: No such namespace: string, compiling:(/Users/9cjin/clojure-noob/pegthing/src/pegthing/core.clj:81:3) 
+pegthing.core> (clean "lol, lol")
+"LOL, LOL"
+pegthing.core> (new-board 6)
+{7 {:connections {2 4, 9 8, 16 11, 18 12}, :pegged true}, 20 {:connections {9 14, 18 19}, :pegged true}, 1 {:pegged true, :connections {4 2, 6 3}}, 4 {:connections {1 2, 6 5, 11 7, 13 8}, :pegged true}, 15 {:connections {6 10, 13 14}, :pegged true}, 21 {:connections {10 15, 19 20}, :pegged true}, 13 {:connections {4 8, 6 9, 11 12, 15 14}, :pegged true}, 6 {:connections {1 3, 4 5, 13 9, 15 10}, :pegged true}, 17 {:connections {8 12, 19 18}, :pegged true}, 3 {:pegged true, :connections {8 5, 10 6}}, 12 {:connections {5 8, 14 13}, :pegged true}, 2 {:pegged true, :connections {7 4, 9 5}}, 19 {:connections {8 13, 10 14, 17 18, 21 20}, :pegged true}, 11 {:connections {4 7, 13 12}, :pegged true}, 9 {:connections {2 5, 7 8, 18 13, 20 14}, :pegged true}, 5 {:pegged true, :connections {12 8, 14 9}}, 14 {:connections {5 9, 12 13}, :pegged true}, 16 {:connections {7 11, 18 17}, :pegged true}, 10 {:connections {3 6, 8 9, 19 14, 21 15}, :pegged true}, 18 {:connections {7 12, 9 13, 16 17, 20 19}, :pegged true}, :row 6, 8 {:connections {3 5, 10 9, 17 12, 19 13}, :pegged true}}
+pegthing.core> (new-board 3)
+{:row 3, 1 {:pegged true, :connections {4 2, 6 3}}, 4 {:connections {1 2, 6 5}, :pegged true}, 6 {:connections {1 3, 4 5}, :pegged true}, 2 {:pegged true}, 3 {:pegged true}, 5 {:pegged true}}
+pegthing.core> (get-in (new-board 4) [3 :connection])
+nil
+pegthing.core> (get-in (new-board 4) [1 :connection])
+nil
+pegthing.core> (new-board 4)
+{7 {:connections {2 4, 9 8}, :pegged true}, 1 {:pegged true, :connections {4 2, 6 3}}, 4 {:connections {1 2, 6 5}, :pegged true}, 6 {:connections {1 3, 4 5}, :pegged true}, 3 {:pegged true, :connections {8 5, 10 6}}, 2 {:pegged true, :connections {7 4, 9 5}}, 9 {:connections {2 5, 7 8}, :pegged true}, 5 {:pegged true}, 10 {:connections {3 6, 8 9}, :pegged true}, :row 4, 8 {:connections {3 5, 10 9}, :pegged true}}
+pegthing.core> (get-in (new-board 4) [1 :connections])
+{4 2, 6 3}
+pegthing.core> (filter #(> (second %) 1) (get-in (new-board 4) [1 :connections]))
+([4 2] [6 3])
+pegthing.core> (def my-board (assoc-in (new-board 5) [4 :pegged] false))
+#'pegthing.core/my-board
+pegthing.core> (valid-moves my-board 3)
+{}
+pegthing.core> (valid-moves my-board 1)
+{4 2}
+pegthing.core> (valid-move? my-board 8 4)
+nil
+pegthing.core> (valid-move? my-board 1 4)
+2
+pegthing.core> (can-move? my-board)
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: can-move? in this context, compiling:(/private/var/folders/mb/ssqjl1rx11nbbczdkpvvj748jg76y6/T/form-init7691726556187990712.clj:1:1) 
+pegthing.core> 
