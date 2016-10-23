@@ -107,3 +107,10 @@
                 (assoc errors fieldname error-messages))))
           {}
           validations))
+
+(defmacro if-valid
+  "Handle validation more concisely"
+  [to-validate validations errors-name & then-else]
+  `(let [~errors-name (validate ~to-validate ~validations)]
+     (if (empty? ~errors-name)
+       ~@then-else)))
