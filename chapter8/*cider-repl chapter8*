@@ -1,0 +1,264 @@
+; CIDER 0.8.1 (package: 20141120.1746) (Java 1.6.0_65, Clojure 1.8.0, nREPL 0.2.12)
+chapter8.core> (my-print)
+ArityException Wrong number of args (0) passed to: core/my-print  clojure.lang.AFn.throwArity (AFn.java:429)
+chapter8.core> (my-print "hah")
+(let [result "hah"] (print result) result)
+chapter8.core> (eval (my-print "hah"))
+hah
+"hah"
+chapter8.core> +
+#object[clojure.core$_PLUS_ 0x4594a0ad "clojure.core$_PLUS_@4594a0ad"]
+chapter8.core> '+
++
+chapter8.core> (my-print "jin")
+jin
+"jin"
+chapter8.core> (when true true)
+true
+chapter8.core> (when false true)
+nil
+chapter8.core> unless
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: unless in this context, compiling:(/private/var/folders/mb/ssqjl1rx11nbbczdkpvvj748jg76y6/T/form-init791343319921430255.clj:1:4524) 
+chapter8.core> (unless)
+ArityException Wrong number of args (0) passed to: core/unless  clojure.lang.Compiler.macroexpand1 (Compiler.java:6781)
+chapter8.core> (unless (false) "yes" "no")
+ClassCastException java.lang.Boolean cannot be cast to clojure.lang.IFn  chapter8.core/eval3432 (form-init791343319921430255.clj:1)
+chapter8.core> (eval (unless (false) "yes" "no"))
+ClassCastException java.lang.Boolean cannot be cast to clojure.lang.IFn  chapter8.core/eval3434 (form-init791343319921430255.clj:1)
+chapter8.core> (is-small? 6)
+"no"
+chapter8.core> (unless false "yes" "no")
+"yes"
+chapter8.core> (is-small? 80)
+"larger than 50"
+chapter8.core> (code-critic (1 + 1) (+ 1 1))
+Great squid of Madrid, this is bad code: (1 + 1)
+Sweet gorilla of Mania, this is good code: (+ 1 1)
+nil
+chapter8.core> (macroexpand '(code-critic (1 + 1) (+ 1 1)))
+(do (println "Great squid of Madrid, this is bad code:" (quote (1 + 1))) (println "Sweet gorilla of Mania, this is good code:" (quote (+ 1 1))))
+chapter8.core> (code-critic (1 + 1) (+ 1 1))
+Great squid of madrid, this is bad code: (1 + 1)
+sweet gorilla of manila, this is good code: (+ 1 1)
+nil
+chapter8.core> (macroexpand '(code-critic (1 + 1) (+ 1 1)))
+(do (clojure.core/println "Great squid of madrid, this is bad code:" (quote (1 + 1))) (clojure.core/println "sweet gorilla of manila, this is good code:" (quote (+ 1 1))))
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: criticism in this context, compiling:(/Users/9cjin/clojure-noob/chapter8/src/chapter8/core.clj:47:1) 
+chapter8.core> (macroexpand '(code-critic (1 + 1) (+ 1 1)))
+(do (clojure.core/println "Cursed bacteria of Liberia, this is bad code:" (quote (1 + 1))) (clojure.core/println "Sweet sacred boa of Western and Eastern Samoa, this is good code:" (quote (+ 1 1))))
+chapter8.core> (code-critic (1 + 1) (+ 1 1))
+Cursed bacteria of Liberia, this is bad code: (1 + 1)
+Sweet sacred boa of Western and Eastern Samoa, this is good code: (+ 1 1)
+nil
+chapter8.core> (code-critic (1 + 1) (+ 1 1))
+Great squid of Madrid, this is bad code: (1 + 1)
+Sweet gorilla of Manila, this is good code: (+ 1 1)
+NullPointerException   chapter8.core/eval3755 (form-init791343319921430255.clj:1)
+chapter8.core> (macroexpand code-critic)
+CompilerException java.lang.RuntimeException: Can't take value of a macro: #'chapter8.core/code-critic, compiling:(/private/var/folders/mb/ssqjl1rx11nbbczdkpvvj748jg76y6/T/form-init791343319921430255.clj:1:1) 
+chapter8.core> (macroexpand (code-critic (1 + 1) (+ 1 1)))
+Great squid of Madrid, this is bad code: (1 + 1)
+Sweet gorilla of Manila, this is good code: (+ 1 1)
+NullPointerException   chapter8.core/eval3758 (form-init791343319921430255.clj:1)
+chapter8.core> (macroexpand code-critic)
+CompilerException java.lang.RuntimeException: Can't take value of a macro: #'chapter8.core/code-critic, compiling:(/private/var/folders/mb/ssqjl1rx11nbbczdkpvvj748jg76y6/T/form-init791343319921430255.clj:1:1) 
+chapter8.core> (macroexpand (code-critic (1 + 1) (+ 1 1)))
+CompilerException clojure.lang.ArityException: Wrong number of args (2) passed to: core/code-critic, compiling:(/private/var/folders/mb/ssqjl1rx11nbbczdkpvvj748jg76y6/T/form-init791343319921430255.clj:1:14) 
+chapter8.core> (code-critic (1 + 1) (+ 1 1))
+ArityException Wrong number of args (2) passed to: core/code-critic  clojure.lang.Compiler.macroexpand1 (Compiler.java:6781)
+chapter8.core> (code-critic (1 + 1) (+ 1 1))
+ArityException Wrong number of args (2) passed to: core/code-critic  clojure.lang.Compiler.macroexpand1 (Compiler.java:6781)
+chapter8.core> (code-critic (1 + 1) (+ 1 1))
+Sweet lion of Zion, this is bad code: (+ 1 1)
+Great cow of Moscow, this is good code: (1 + 1)
+nil
+chapter8.core> (code-critic-with-error (1 + 1) (+ 1 1))
+Great squid of Madrid, this is bad code: (1 + 1)
+Sweet gorilla of Manila, this is good code: (+ 1 1)
+NullPointerException   chapter8.core/eval3944 (form-init791343319921430255.clj:1)
+chapter8.core> (code-critic (1 + 1) (+ 1 1))
+Sweet lion of Zion, this is bad code: (+ 1 1)
+Great cow of Moscow, this is good code: (1 + 1)
+nil
+chapter8.core> (code-critic (+ 1 1) (1 + 1))
+Sweet lion of Zion, this is bad code: (1 + 1)
+Great cow of Moscow, this is good code: (+ 1 1)
+nil
+chapter8.core> `(+ ~(list 1 2 3))
+(clojure.core/+ (1 2 3))
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: defnmacro in this context, compiling:(/Users/9cjin/clojure-noob/chapter8/src/chapter8/core.clj:72:1) 
+chapter8.core> (with-mischief (println "Here's how I feel about that thing you did:" message))
+Here's how I feel about that thing you did: oh, big deal!
+nil
+chapter8.core> (gensym)
+G__4144
+chapter8.core> (without-mischief)
+i'm still need to say:  oh, big deal!
+nil
+chapter8.core> (without-mischief (println "Here's how i feel about the thing you did: " message))
+Here's how i feel about the thing you did:  Good job!
+i'm still need to say:  oh, big deal!
+nil
+chapter8.core> (without-mischief (println "Here's how i feel about the thing you did: " message))
+Here's how i feel about the thing you did:  Good job!
+NullPointerException   chapter8.core/eval4288 (form-init791343319921430255.clj:1)
+chapter8.core> (without-mischief (println "Here's how i feel about the thing you did: " message))
+Here's how i feel about the thing you did:  Good job!
+i'm still need to say:  oh, big deal!
+nil
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: blarg__2869__auto__ in this context, compiling:(/Users/9cjin/clojure-noob/chapter8/src/chapter8/core.clj:101:1) 
+chapter8.core> `(let [name# "larry Potter"] name#)
+(clojure.core/let [name__4575__auto__ "larry Potter"] name__4575__auto__)
+chapter8.core> (report (do (Thread/sleep 1000) (+ 1 1)))
+(do (Thread/sleep 1000) (+ 1 1)) was successful:  2
+nil
+chapter8.core> (report (do (Thread/sleep 1000) (+ 1 1)))
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: results__4809__auto__ in this context, compiling:(/private/var/folders/mb/ssqjl1rx11nbbczdkpvvj748jg76y6/T/form-init791343319921430255.clj:1:1) 
+chapter8.core> (report (do (Thread/sleep 1000) (+ 1 1)))
+(do (Thread/sleep 1000) (+ 1 1)) was successful:  2
+nil
+chapter8.core> (report-repeat (do (Thread/sleep 1000) (+ 1 1)))
+(do (Thread/sleep 1000) (+ 1 1)) was successful:  2
+nil
+chapter8.core> (report (do (Thread/sleep 1000) (+ 1 1)))
+(do (Thread/sleep 1000) (+ 1 1)) was successful:  2
+nil
+chapter8.core> (report (= 1 1))
+(= 1 1) was successful:  true
+nil
+chapter8.core> (report (= 1 2))
+(= 1 2) was not succesfulL  false
+nil
+(= 1 1) was successful:  true
+(= 1 2) was not succesfulL  false
+code was successful:  (= 1 1)
+code was successful:  (= 1 2)
+chapter8.core> (doseq [code ['(= 1 1) '(= 1 2)]]
+  (report code))
+
+code was successful:  (= 1 1)
+code was successful:  (= 1 2)
+nil
+chapter8.core> (doseq [x [-1 0 1] y [1 2 3]] (println (* x y)))
+-1
+-2
+-3
+0
+0
+0
+1
+2
+3
+nil
+chapter8.core> (* 1 2 3)
+6
+chapter8.core> (doseq [x [-1 0] y [1 2] z [2 4]] (println (* x y z)))
+-2
+-4
+-4
+-8
+0
+0
+0
+0
+nil
+chapter8.core> (doseq [x [-1 10] y [1 2] z [2 4]] (println (* x y z)))
+-2
+-4
+-4
+-8
+20
+40
+40
+80
+nil
+(= 1 1) was successful:  true
+(= 1 2) was not succesfulL  false
+code was successful:  (= 1 1)
+code was successful:  (= 1 2)
+(= 1 1) was successful:  true
+(= 1 2) was not succesfulL  false
+code was successful:  (= 1 1)
+code was successful:  (= 1 2)
+(= 1 1) was successful:  true
+(= 1 2) was not succesfulL  false
+code was successful:  (= 1 1)
+code was successful:  (= 1 2)
+chapter8.core> (doseq-macro report (= 1 1) (= 2 1))
+(= 1 1) was successful:  true
+(= 2 1) was not succesfulL  false
+nil
+chapter8.core> (re-seq #"[A-Z][a-z]+|[0-9]+" "ManishKumar12332")
+("Manish" "Kumar" "12332")
+(= 1 1) was successful:  true
+(= 1 2) was not succesfulL  false
+code was successful:  (= 1 1)
+code was successful:  (= 1 2)
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: validation in this context, compiling:(/Users/9cjin/clojure-noob/chapter8/src/chapter8/core.clj:195:13) 
+(= 1 1) was successful:  true
+(= 1 2) was not succesfulL  false
+code was successful:  (= 1 1)
+code was successful:  (= 1 2)
+chapter8.core> (error-messages-for "" ["Please enter a name" not-empty])
+("Please enter a name")
+chapter8.core> (not nil "")
+ArityException Wrong number of args (2) passed to: core/not  clojure.lang.AFn.throwArity (AFn.java:429)
+chapter8.core> (not (nil ""))
+CompilerException java.lang.IllegalArgumentException: Can't call nil, form: (nil ""), compiling:(/private/var/folders/mb/ssqjl1rx11nbbczdkpvvj748jg76y6/T/form-init791343319921430255.clj:1:6) 
+chapter8.core> (not ((second [1]) ""))
+NullPointerException   chapter8.core/eval5855 (form-init791343319921430255.clj:1)
+chapter8.core> (second [1])
+nil
+chapter8.core> (partition 2 ["Please enter a name" not-empty])
+(("Please enter a name" #object[clojure.core$not_empty 0x7e13674c "clojure.core$not_empty@7e13674c"]))
+chapter8.core> (validate order-details order-details-validations)
+IllegalArgumentException Don't know how to create ISeq from: chapter8.core$fn__5839  clojure.lang.RT.seqFrom (RT.java:542)
+(= 1 1) was successful:  true
+(= 1 2) was not succesfulL  false
+code was successful:  (= 1 1)
+code was successful:  (= 1 2)
+chapter8.core> (validate order-details order-details-validations)
+IllegalArgumentException Don't know how to create ISeq from: chapter8.core$fn__5969  clojure.lang.RT.seqFrom (RT.java:542)
+chapter8.core> (partition 2 ["Please enter a name" not-empty])
+(("Please enter a name" #object[clojure.core$not_empty 0x7e13674c "clojure.core$not_empty@7e13674c"]))
+chapter8.core> (error-messages-for "" ["Please enter a name" not-empty])
+("Please enter a name")
+chapter8.core> (error-messages-for "sa" ["Please enter a name" not-empty])
+()
+(= 1 1) was successful:  true
+(= 1 2) was not succesfulL  false
+code was successful:  (= 1 1)
+code was successful:  (= 1 2)
+chapter8.core> (validate order-details order-details-validations)
+IllegalArgumentException Don't know how to create ISeq from: chapter8.core$fn__6094  clojure.lang.RT.seqFrom (RT.java:542)
+(= 1 1) was successful:  true
+(= 1 2) was not succesfulL  false
+code was successful:  (= 1 1)
+code was successful:  (= 1 2)
+chapter8.core> (validate order-details order-details-validations)
+IllegalArgumentException Don't know how to create ISeq from: chapter8.core$fn__6217  clojure.lang.RT.seqFrom (RT.java:542)
+(= 1 1) was successful:  true
+(= 1 2) was not succesfulL  falscode was successful:  (= 1 1)
+code was successful:  (= 1 2)
+chapter8.core> 
+chapter8.core> (validate)
+ArityException Wrong number of args (0) passed to: core/validate  clojure.lang.AFn.throwArity (AFn.java:429)
+chapter8.core> (validate order-details order-details-validations)
+IllegalArgumentException Don't know how to create ISeq from: chapter8.core$fn__6340  clojure.lang.RT.seqFrom (RT.java:542)
+(= 1 1) was successful:  true
+(= 1 2) was not succesfulL  false
+code was successful:  (= 1 1)
+code was successful:  (= 1 2)
+chapter8.core> (validate order-details order-details-validations)
+{:email ("Your email address doesn't look like an email address")}
+(= 1 1) was successful:  true
+(= 1 2) was not succesfulL  false
+code was successful:  (= 1 1)
+code was successful:  (= 1 2)
+:failure {:email (Your email address doesn't look like an email address)}
+chapter8.core>  (macroexpand
+ '(if-valid order-details order-details-validations my-error-name
+            (println :success)
+            (println :failure my-error-name)))
+(let* [my-error-name (chapter8.core/validate order-details order-details-validations)] (if (clojure.core/empty? my-error-name) (println :success) (println :failure my-error-name)))
+chapter8.core> 
